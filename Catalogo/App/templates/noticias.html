@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>Noticias</title>
+        <meta charset='utf-12'>
+    </head>
+    <body>
+        <h1 style='text-align:center;'>Noticias</h1>
+
+        {% for noticia in todas_las_noticias %}
+
+            <div style='border-style:solid; text-align:left;'>
+                <h2>{{ noticia.titulo }}</h2>
+                <h5>{{ noticia.fecha }}</h5>
+                <p>{{ noticia.puntaje }}</p>
+
+                <img src="img_chania.jpg" alt="Img_noticia" width="460" height="345">
+
+                <h2 style='color:green'>Puntuaciones:</h2>
+                {% for puntuacion in noticia.puntuaciones.all %}
+
+                    <h5 style='color:orange'>{{ puntuacion.cuerpo }}</h5>
+                 <form action="/action_page.php">
+                  
+                {% endfor %}
+
+                <form method='POST' action='{% url "puntuacion" noticia_id=noticia.id %}'>
+                    {% csrf_token %}
+                    <input type='text' name='cuerpo'>
+                    <input type='submit'>
+                </form>
+            </div>
+            <br>
+
+        {% endfor %}
+
+    </body>
+</html>
